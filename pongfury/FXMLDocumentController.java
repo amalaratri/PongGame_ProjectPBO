@@ -405,3 +405,35 @@ class GameManager {
         handlePaddleHit(computerPaddle);
     }
 }
+    
+    private void handlePaddleHit(Paddle hitPaddle) {
+        soundManager.playHitSound();
+
+        // Hitung posisi relatif tabrakan pada paddle
+        double relativeIntersectY = ((ball.getYPos() + Ball.RADIUS/2) - hitPaddle.yPos) / (Paddle.HEIGHT/2);
+        relativeIntersectY = Math.max(-1, Math.min(1, relativeIntersectY));
+
+        // Hitung sudut pantulan
+        double bounceAngle = relativeIntersectY * (5 * Math.PI/12);
+
+        // Tentukan batas kecepatan dan peningkatan kecepatan
+        double maxBallSpeed;
+        double speedIncrease;
+
+        switch (difficulty) {
+            case EASY:
+                maxBallSpeed = GameSettings.MAX_BALL_SPEED_EASY;
+                speedIncrease = 1.4;
+                break;
+            case MEDIUM:
+                maxBallSpeed = GameSettings.MAX_BALL_SPEED_MEDIUM;
+                speedIncrease = 1.5;
+                break;
+            case HARD:
+                maxBallSpeed = GameSettings.MAX_BALL_SPEED_HARD;
+                speedIncrease = 1.6;
+                break;
+            default:
+                maxBallSpeed = GameSettings.MAX_BALL_SPEED_MEDIUM;
+                speedIncrease = 1.5;
+        }
