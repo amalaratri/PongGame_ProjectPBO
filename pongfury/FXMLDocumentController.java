@@ -357,3 +357,51 @@ class GameManager {
             System.out.println("Background image not found. Using default background.");
         }
     }
+
+    public void run() {
+        drawBackground();
+        
+        if (gameStarted) {
+            updateGameEntities();
+            checkCollisions();
+        } else {
+            showStartScreen();
+        }
+        
+        drawScore();
+        drawEntities();
+    }
+
+    private void updateGameEntities() {
+        ball.update();
+        computerPaddle.update();
+    }
+
+    private void checkCollisions() {
+        checkWallCollision();
+        checkPaddleCollision();
+        checkScoring();
+    }
+
+    private void checkWallCollision() {
+        if (ball.getYPos() > GameSettings.SCREEN_HEIGHT - 20 || ball.getYPos() < 0) {
+            ball.setYSpeed(-ball.getYSpeed());
+            soundManager.playWallHitSound();
+        }
+    }
+
+    private void checkPaddleCollision() {
+    // Cek tabrakan dengan paddle kiri (player)
+    if (((ball.getXPos() < Paddle.WIDTH) && 
+         ball.getYPos() >= playerPaddle.yPos && 
+         ball.getYPos() <= playerPaddle.yPos + Paddle.HEIGHT)) {
+        handlePaddleHit(playerPaddle);
+    }
+    
+    // Cek tabrakan dengan paddle kanan (komputer)
+    if (((ball.getXPos() + Ball.RADIUS > GameSettings.SCREEN_WIDTH - Paddle.WIDTH) && 
+         ball.getYPos() >= computerPaddle.yPos && 
+         ball.getYPos() <= computerPaddle.yPos + Paddle.HEIGHT)) {
+        handlePaddleHit(computerPaddle);
+    }
+}
