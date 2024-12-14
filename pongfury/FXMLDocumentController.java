@@ -272,3 +272,50 @@ enum GameDifficulty {
     public double getMovementSpeed() { return movementSpeed; }
     public double getAccuracyFactor() { return accuracyFactor; }
 }
+
+class SoundManager {
+    private MediaPlayer soundtrack;
+    private MediaPlayer hitSound;
+    private MediaPlayer wallHitSound;
+    private MediaPlayer clickSound;
+
+    public SoundManager() {
+        initializeSounds();
+    }
+
+    private void initializeSounds() {
+        soundtrack = createMediaPlayer("/pongfury/sounds/soundtrack.mp3", 0.5);
+        hitSound = createMediaPlayer("/pongfury/sounds/sound5.wav", 0.7);
+        wallHitSound = createMediaPlayer("/pongfury/sounds/hitwall.mp3", 0.7);
+        clickSound = createMediaPlayer("/pongfury/sounds/click.mp3", 1.0);
+    }
+
+    private MediaPlayer createMediaPlayer(String resourcePath, double volume) {
+        Media media = new Media(getClass().getResource(resourcePath).toExternalForm());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setVolume(volume);
+        return player;
+    }
+
+    public void playSoundtrack() { 
+        soundtrack.play(); 
+    }
+
+    public void stopSoundtrack() { 
+        soundtrack.stop(); 
+    }
+
+    public void playHitSound() { 
+        hitSound.seek(Duration.ZERO);
+        hitSound.play(); 
+    }
+
+    public void playWallHitSound() { 
+        wallHitSound.seek(Duration.ZERO);
+        wallHitSound.play(); 
+    }
+
+    public void playClickSound() { 
+        clickSound.play(); 
+    }
+}
