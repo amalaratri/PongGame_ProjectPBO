@@ -57,3 +57,24 @@ public class DiffController implements Initializable {
         selectedDifficulty = GameDifficulty.HARD;
         memulaiPermainan();
     }
+
+        private void memulaiPermainan() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+            Parent root = loader.load();
+
+            FXMLDocumentController gameController = loader.getController();
+
+            gameController.setDifficulty(selectedDifficulty);
+
+            Stage stage = (Stage) easy.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Gagal memuat layar permainan: " + e.getMessage());
+        }
+    }
+}
