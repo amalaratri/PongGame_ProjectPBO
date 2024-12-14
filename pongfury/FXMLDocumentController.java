@@ -82,3 +82,18 @@ public class FXMLDocumentController implements Initializable {
     }
     
 }
+
+abstract class GameEntity {
+    protected double xPos;
+    protected double yPos;
+    protected static final double WIDTH = 15;
+    protected static final double HEIGHT = 100;
+
+    public GameEntity(double xPos, double yPos) {
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
+
+    public abstract void update();
+    public abstract void draw(GraphicsContext gc);
+}
