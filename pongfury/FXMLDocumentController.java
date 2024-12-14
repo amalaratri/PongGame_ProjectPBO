@@ -46,3 +46,20 @@ public class FXMLDocumentController implements Initializable {
         setupGameLoop();
         setupControls();
     }
+    private void setupGameLoop() {
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), e -> gameManager.run()));
+        tl.setCycleCount(Timeline.INDEFINITE);
+        tl.play();
+    }
+
+    private void setupControls() {
+        gameCanvas.setOnMouseMoved(e -> gameManager.updatePlayerPosition(e.getY()));
+        gameCanvas.setOnMouseClicked(e -> gameManager.startGame());
+    }
+
+    @FXML
+    private void tekanSaya(MouseEvent event) {
+        soundManager.stopSoundtrack();
+        soundManager.playClickSound();
+        navigateToMainMenu(event);
+    }
