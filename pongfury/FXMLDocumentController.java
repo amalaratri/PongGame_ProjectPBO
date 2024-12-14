@@ -247,3 +247,28 @@ class Ball extends GameEntity {
     public void setYSpeed(double ySpeed) { this.ySpeed = ySpeed; }
     
 }
+
+class GameSettings {
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 600;
+    public static final double MAX_BALL_SPEED_EASY = 6;
+    public static final double MAX_BALL_SPEED_MEDIUM = 8;
+    public static final double MAX_BALL_SPEED_HARD = 10;
+}
+
+enum GameDifficulty {
+    EASY(0.1, 0.5),
+    MEDIUM(0.2, 0.7),
+    HARD(0.3, 0.9);
+
+    private final double movementSpeed;
+    private final double accuracyFactor;
+
+    GameDifficulty(double movementSpeed, double accuracyFactor) {
+        this.movementSpeed = movementSpeed;
+        this.accuracyFactor = accuracyFactor;
+    }
+
+    public double getMovementSpeed() { return movementSpeed; }
+    public double getAccuracyFactor() { return accuracyFactor; }
+}
