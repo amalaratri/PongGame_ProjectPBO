@@ -319,3 +319,41 @@ class SoundManager {
         clickSound.play(); 
     }
 }
+
+class GameManager {
+    private Ball ball;
+    private Paddle playerPaddle;
+    private ComputerPaddle computerPaddle;
+    private GraphicsContext gc;
+    private SoundManager soundManager;
+    private boolean gameStarted = false;
+    private int playerScore = 0;
+    private int computerScore = 0;
+    private GameDifficulty difficulty = GameDifficulty.MEDIUM;
+    private Image backgroundImage;
+
+    public GameManager(GraphicsContext gc, SoundManager soundManager) {
+        this.gc = gc;
+        this.soundManager = soundManager;
+        initializeGame();
+    }
+
+    private void initializeGame() {
+        ball = new Ball(GameSettings.SCREEN_WIDTH / 2, GameSettings.SCREEN_HEIGHT / 2);
+        playerPaddle = new Paddle(0, GameSettings.SCREEN_HEIGHT / 2, 
+                                  GameSettings.SCREEN_HEIGHT, Paddle.PaddleType.PLAYER);
+        computerPaddle = new ComputerPaddle(GameSettings.SCREEN_WIDTH - Paddle.WIDTH, 
+                                            GameSettings.SCREEN_HEIGHT / 2, 
+                                            GameSettings.SCREEN_HEIGHT, ball, difficulty);
+        
+        loadBackgroundImage();
+        soundManager.playSoundtrack();
+    }
+
+    private void loadBackgroundImage() {
+        try {
+            backgroundImage = new Image(getClass().getResourceAsStream("/pongfury/images/lapangan.png"));
+        } catch (Exception e) {
+            System.out.println("Background image not found. Using default background.");
+        }
+    }
