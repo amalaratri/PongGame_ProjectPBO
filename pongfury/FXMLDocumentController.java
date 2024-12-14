@@ -188,3 +188,25 @@ public void update() {
         yPos = Math.max(0, Math.min(screenHeight - HEIGHT, yPos));
     }
 }
+
+    private double calculatePredictedPosition() {
+        double predictedY = ball.getYPos() + 
+            (xPos - ball.getXPos()) * (ball.getYSpeed() / ball.getXSpeed());
+        
+        // Apply difficulty-based accuracy and movement
+        return applyDifficultyModifiers(predictedY);
+    }
+
+    private double applyDifficultyModifiers(double predictedY) {
+        double movementSpeed = difficulty.getMovementSpeed();
+        double accuracyFactor = difficulty.getAccuracyFactor();
+        
+        double randomOffset = (new Random().nextDouble() - 0.5) * (1.0 - accuracyFactor) * 50;
+        double centerPaddle = yPos + HEIGHT / 2;
+        
+        double targetY = predictedY + randomOffset;
+        double movementDistance = (targetY - centerPaddle) * movementSpeed * accuracyFactor;
+        
+        return centerPaddle + movementDistance;
+    }
+}
