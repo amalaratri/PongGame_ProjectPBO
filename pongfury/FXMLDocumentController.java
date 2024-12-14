@@ -127,3 +127,13 @@ class Paddle extends GameEntity {
         yPos = Math.max(0, Math.min(screenHeight - HEIGHT, newYPos));
     }
 }
+
+class ComputerPaddle extends Paddle {
+    public Ball ball;
+    private final GameDifficulty difficulty;
+
+    public ComputerPaddle(double xPos, double yPos, double screenHeight, Ball ball, GameDifficulty difficulty) {
+        super(xPos, yPos, screenHeight, PaddleType.COMPUTER);
+        this.ball = ball;
+        this.difficulty = difficulty;
+    }
