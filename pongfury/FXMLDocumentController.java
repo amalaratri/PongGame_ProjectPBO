@@ -171,3 +171,20 @@ public void update() {
                 movementSpeed = 0.2;
                 accuracyFactor = 0.7;
         }
+
+        // Tambahkan sedikit gangguan untuk membuat gerakan tidak terlalu sempurna
+        double randomOffset = (new Random().nextDouble() - 0.5) * (1.0 - accuracyFactor) * 50;
+        
+        // Hitung target y dengan offset
+        double targetY = predictedY + randomOffset;
+        
+        // Hitung perpindahan paddle
+        double movementDistance = (targetY - centerPaddle) * movementSpeed * accuracyFactor;
+        
+        // Perbaharui posisi paddle
+        yPos += movementDistance;
+        
+        // Pastikan paddle tidak keluar dari batas layar
+        yPos = Math.max(0, Math.min(screenHeight - HEIGHT, yPos));
+    }
+}
