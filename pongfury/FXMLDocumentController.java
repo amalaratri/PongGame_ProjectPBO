@@ -97,6 +97,7 @@ abstract class GameEntity {
     public abstract void update();
     public abstract void draw(GraphicsContext gc);
 }
+
 class Paddle extends GameEntity {
     final double screenHeight;
     private final PaddleType type;
@@ -110,3 +111,19 @@ class Paddle extends GameEntity {
         this.screenHeight = screenHeight;
         this.type = type;
     }
+
+    @Override
+    public void update() {
+        // Base update method, can be overridden by subclasses
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.RED);
+        gc.fillRect(xPos, yPos, WIDTH, HEIGHT);
+    }
+
+    public void moveTo(double newYPos) {
+        yPos = Math.max(0, Math.min(screenHeight - HEIGHT, newYPos));
+    }
+}
