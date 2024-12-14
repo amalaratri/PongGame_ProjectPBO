@@ -11,10 +11,8 @@ public class PongFury extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Memuat file FXML
         Parent root = FXMLLoader.load(getClass().getResource("mainmenu.fxml"));
         
-        // Membuat scene dan menambahkan ke stage
         Scene scene = new Scene(root);
 
         stage.setTitle("Pong Game");
