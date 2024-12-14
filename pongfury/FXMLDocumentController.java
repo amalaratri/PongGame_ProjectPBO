@@ -97,3 +97,16 @@ abstract class GameEntity {
     public abstract void update();
     public abstract void draw(GraphicsContext gc);
 }
+class Paddle extends GameEntity {
+    final double screenHeight;
+    private final PaddleType type;
+
+    public enum PaddleType {
+        PLAYER, COMPUTER
+    }
+
+    public Paddle(double xPos, double yPos, double screenHeight, PaddleType type) {
+        super(xPos, yPos);
+        this.screenHeight = screenHeight;
+        this.type = type;
+    }
