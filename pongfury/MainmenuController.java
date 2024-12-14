@@ -38,8 +38,6 @@ public class MainmenuController implements Initializable {
         clk.setVolume(1.0);
     }
     
-    
-    
     @FXML
     private void tekanSaya(MouseEvent event) {
         clk.play();
@@ -59,4 +57,3 @@ public class MainmenuController implements Initializable {
     }
     
 }
-
