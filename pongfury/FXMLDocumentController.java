@@ -137,3 +137,37 @@ class ComputerPaddle extends Paddle {
         this.ball = ball;
         this.difficulty = difficulty;
     }
+
+  @Override
+public void update() {
+    // Hanya bergerak ketika bola berada di sebelah kanan layar
+    if (ball.getXPos() > GameSettings.SCREEN_WIDTH / 2) {
+        // Hitung posisi prediksi bola
+        double predictedY = ball.getYPos() + 
+            (xPos - ball.getXPos()) * (ball.getYSpeed() / ball.getXSpeed());
+        
+        // Pastikan prediksi y dalam batas layar
+        predictedY = Math.max(0, Math.min(screenHeight - HEIGHT, predictedY));
+        
+        double centerPaddle = yPos + HEIGHT / 2;
+        double movementSpeed;
+        double accuracyFactor;
+
+        // Sesuaikan kecepatan dan akurasi berdasarkan kesulitan
+        switch (difficulty) {
+            case EASY:
+                movementSpeed = 0.1; // Gerakan lambat
+                accuracyFactor = 0.5; // Kurang presisi
+                break;
+            case MEDIUM:
+                movementSpeed = 0.2; // Gerakan sedang
+                accuracyFactor = 0.7; // Cukup presisi
+                break;
+            case HARD:
+                movementSpeed = 0.3; // Gerakan cepat
+                accuracyFactor = 0.9; // Sangat presisi
+                break;
+            default:
+                movementSpeed = 0.2;
+                accuracyFactor = 0.7;
+        }
