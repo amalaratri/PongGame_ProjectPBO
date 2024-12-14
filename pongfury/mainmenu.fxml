@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="pongfury.MainmenuController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/ASUS/OneDrive/Dokumen/PING%20PONG_20241212_230413_0000.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="start" fitHeight="62.0" fitWidth="200.0" layoutX="300.0" layoutY="418.0" onMouseClicked="#tekanSaya" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
