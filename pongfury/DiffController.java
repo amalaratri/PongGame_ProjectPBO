@@ -21,3 +21,39 @@ public class DiffController implements Initializable {
     private ImageView med;
     @FXML
     private ImageView hard;
+    
+    private GameDifficulty selectedDifficulty;
+    
+    public static MediaPlayer clk;
+    public static final Media click = new Media(FXMLDocumentController.class.getResource("/pongfury/sounds/click.mp3").toExternalForm());
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        easy.setOnMouseClicked(this::tekanEasy);
+        med.setOnMouseClicked(this::tekanMed);
+        hard.setOnMouseClicked(this::tekanHard);
+        
+        clk = new MediaPlayer(click);
+        clk.setVolume(1.0);
+    }    
+
+    @FXML
+    private void tekanEasy(MouseEvent event) {
+        clk.play();
+        selectedDifficulty = GameDifficulty.EASY;
+        memulaiPermainan();
+    }
+
+    @FXML
+    private void tekanMed(MouseEvent event) {
+        clk.play();
+        selectedDifficulty = GameDifficulty.MEDIUM;
+        memulaiPermainan();
+    }
+
+    @FXML
+    private void tekanHard(MouseEvent event) {
+        clk.play();
+        selectedDifficulty = GameDifficulty.HARD;
+        memulaiPermainan();
+    }
