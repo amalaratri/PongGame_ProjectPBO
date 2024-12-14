@@ -46,6 +46,7 @@ public class FXMLDocumentController implements Initializable {
         setupGameLoop();
         setupControls();
     }
+
     private void setupGameLoop() {
         Timeline tl = new Timeline(new KeyFrame(Duration.millis(10), e -> gameManager.run()));
         tl.setCycleCount(Timeline.INDEFINITE);
@@ -63,3 +64,21 @@ public class FXMLDocumentController implements Initializable {
         soundManager.playClickSound();
         navigateToMainMenu(event);
     }
+
+    private void navigateToMainMenu(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainmenu.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Game Scene");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void setDifficulty(GameDifficulty difficulty) {
+        gameManager.setDifficulty(difficulty);
+    }
+    
+}
