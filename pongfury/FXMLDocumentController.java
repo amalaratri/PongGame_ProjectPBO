@@ -437,3 +437,55 @@ class GameManager {
                 maxBallSpeed = GameSettings.MAX_BALL_SPEED_MEDIUM;
                 speedIncrease = 1.5;
         }
+
+        // Tambahkan variasi kecepatan acak
+        double randomSpeedVariation = 1.0 + (new Random().nextDouble() * 0.2);
+        speedIncrease *= randomSpeedVariation;
+
+        // Hitung kecepatan baru
+        double newXSpeed = Math.abs(ball.getXSpeed()) * speedIncrease * Math.signum(ball.getXSpeed());
+        double newYSpeed = Math.sin(bounceAngle) * 5 * speedIncrease;
+
+        // Batasi kecepatan maksimum
+        newXSpeed = Math.signum(newXSpeed) * Math.min(Math.abs(newXSpeed), maxBallSpeed);
+        newYSpeed = Math.signum(newYSpeed) * Math.min(Math.abs(newYSpeed), maxBallSpeed);
+
+        ball.setXSpeed(-newXSpeed);
+        ball.setYSpeed(newYSpeed);
+    }
+
+    private void checkScoring() {
+        // Skor untuk komputer
+        if (ball.getXPos() < 0) {
+            computerScore++;
+            resetBall();
+        }
+
+        // Skor untuk player
+        if (ball.getXPos() > GameSettings.SCREEN_WIDTH) {
+            playerScore++;
+            resetBall();
+        }
+    }
+
+    private void resetBall() {
+        ball = new Ball(GameSettings.SCREEN_WIDTH / 2, GameSettings.SCREEN_HEIGHT / 2);
+        // Update referensi bola pada computerPaddle
+        computerPaddle.ball = ball;
+        gameStarted = false;
+    }
+
+    private void drawBackground() {
+        if (backgroundImage != null) {
+            gc.drawImage(backgroundImage, 0, 0, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
+        } else {
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0, 0, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
+        }
+    }
+
+    private void showStartScreen() {
+        gc.setStroke(Color.WHITE);
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.strokeText("Click to Start", GameSettings.SCREEN_WIDTH / 2, GameSettings.SCREEN_HEIGHT / 2);
+    }
