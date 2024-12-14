@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package pongfury;
 
 import java.net.URL;
@@ -17,12 +13,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author raiha
- */
-
 public class MainmenuController implements Initializable {
 
     @FXML
@@ -33,7 +23,6 @@ public class MainmenuController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         clk = new MediaPlayer(click);
         clk.setVolume(1.0);
     }
@@ -45,10 +34,8 @@ public class MainmenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("diff.fxml"));
             Parent root = loader.load();
 
-            // Dapatkan stage dari button yang ditekan
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            
-            // Atur scene baru
+
             stage.setScene(new Scene(root));
             stage.setTitle("Game Scene");
         } catch (Exception e) {
