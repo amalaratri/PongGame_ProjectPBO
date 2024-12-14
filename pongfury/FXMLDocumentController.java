@@ -25,6 +25,7 @@ import javafx.util.Duration;
 
 public class FXMLDocumentController implements Initializable {
 
+
     private GameManager gameManager;
     private SoundManager soundManager;
     private GraphicsContext gc;
@@ -32,3 +33,16 @@ public class FXMLDocumentController implements Initializable {
     private ImageView menu;
     @FXML
     private Canvas gameCanvas;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        gameCanvas.setWidth(GameSettings.SCREEN_WIDTH);
+        gameCanvas.setHeight(GameSettings.SCREEN_HEIGHT);
+        gc = gameCanvas.getGraphicsContext2D();
+
+        soundManager = new SoundManager();
+        gameManager = new GameManager(gc, soundManager);
+
+        setupGameLoop();
+        setupControls();
+    }
