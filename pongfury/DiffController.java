@@ -13,3 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+public class DiffController implements Initializable {
+    @FXML
+    private ImageView easy;
+    @FXML
+    private ImageView med;
+    @FXML
+    private ImageView hard;
