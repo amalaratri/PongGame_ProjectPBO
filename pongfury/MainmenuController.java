@@ -22,3 +22,41 @@ import javafx.stage.Stage;
  *
  * @author raiha
  */
+
+public class MainmenuController implements Initializable {
+
+    @FXML
+    private ImageView start;
+    
+    public static MediaPlayer clk;
+    public static final Media click = new Media(FXMLDocumentController.class.getResource("/pongfury/sounds/click.mp3").toExternalForm());
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        clk = new MediaPlayer(click);
+        clk.setVolume(1.0);
+    }
+    
+    
+    
+    @FXML
+    private void tekanSaya(MouseEvent event) {
+        clk.play();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("diff.fxml"));
+            Parent root = loader.load();
+
+            // Dapatkan stage dari button yang ditekan
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            
+            // Atur scene baru
+            stage.setScene(new Scene(root));
+            stage.setTitle("Game Scene");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+}
+
