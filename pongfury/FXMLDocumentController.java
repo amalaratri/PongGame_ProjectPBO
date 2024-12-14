@@ -489,3 +489,31 @@ class GameManager {
         gc.setTextAlign(TextAlignment.CENTER);
         gc.strokeText("Click to Start", GameSettings.SCREEN_WIDTH / 2, GameSettings.SCREEN_HEIGHT / 2);
     }
+
+    private void drawScore() {
+        gc.setFont(Font.font(25));
+        gc.setFill(Color.WHITE);
+        gc.fillText(playerScore + "\t\t\t\t\t\t\t\t" + computerScore, 
+                    GameSettings.SCREEN_WIDTH / 2, 100);
+    }
+
+    private void drawEntities() {
+        ball.draw(gc);
+        playerPaddle.draw(gc);
+        computerPaddle.draw(gc);
+    }
+
+    public void updatePlayerPosition(double yPos) {
+        playerPaddle.moveTo(yPos);
+    }
+
+    public void startGame() {
+        gameStarted = true;
+    }
+
+    public void setDifficulty(GameDifficulty difficulty) {
+        this.difficulty = difficulty;
+        computerPaddle = new ComputerPaddle(GameSettings.SCREEN_WIDTH - Paddle.WIDTH, GameSettings.SCREEN_HEIGHT / 2, GameSettings.SCREEN_HEIGHT, ball, difficulty);
+    }
+    
+}
