@@ -210,3 +210,40 @@ public void update() {
         return centerPaddle + movementDistance;
     }
 }
+
+class Ball extends GameEntity {
+    private double xSpeed;
+    private double ySpeed;
+    public static final double RADIUS = 15;
+
+    public Ball(double xPos, double yPos) {
+        super(xPos, yPos);
+        randomizeInitialSpeed();
+    }
+
+    private void randomizeInitialSpeed() {
+        xSpeed = new Random().nextInt(2) == 0 ? 2 : -2;
+        ySpeed = new Random().nextInt(2) == 0 ? 2 : -2;
+    }
+
+    @Override
+    public void update() {
+        xPos += xSpeed;
+        yPos += ySpeed;
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.setFill(Color.WHITE);
+        gc.fillOval(xPos, yPos, RADIUS, RADIUS);
+    }
+
+    // Getters and setters
+    public double getXSpeed() { return xSpeed; }
+    public double getYSpeed() { return ySpeed; }
+    public double getXPos() { return xPos; }
+    public double getYPos() { return yPos; }
+    public void setXSpeed(double xSpeed) { this.xSpeed = xSpeed; }
+    public void setYSpeed(double ySpeed) { this.ySpeed = ySpeed; }
+    
+}
